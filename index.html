@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<title>LunarWorld — Правила сервера</title>
+
+<meta name="description" content="Официальные правила Minecraft-сервера LunarWorld.">
+<meta name="theme-color" content="#080b18">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(94, 82, 180, 0.22), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(54, 130, 210, 0.16), transparent 30%),
+        linear-gradient(180deg, #050712 0%, #080b18 50%, #040611 100%);
+    color: #f5f7ff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.45;
+    background-image:
+        radial-gradient(circle, white 1px, transparent 1px),
+        radial-gradient(circle, #aebdff 1px, transparent 1px),
+        radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 130px 130px, 190px 190px, 250px 250px;
+    background-position: 10px 20px, 50px 80px, 100px 40px;
+    z-index: -1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(5, 7, 18, 0.88);
+    backdrop-filter: blur(18px);
+}
+
+.header-inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 35% 30%, #ffffff, #aebdff 35%, #6476d8 70%, #29315e);
+    box-shadow: 0 0 25px rgba(130, 145, 255, 0.45);
+    color: #101326;
+    font-size: 20px;
+}
+
+.logo span {
+    color: #aebdff;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.nav a {
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #aeb5ca;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav a:hover {
+    color: white;
+    background: rgba(255,255,255,0.07);
+}
+
+.menu-button {
+    display: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    border-radius: 10px;
+    padding: 9px 13px;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+    min-height: 610px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 80px 0;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border: 1px solid rgba(174,189,255,0.2);
+    border-radius: 999px;
+    background: rgba(110,125,220,0.08);
+    color: #b9c5ff;
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 .moon-text {
+    color: #aebdff;
+    text-shadow: 0 0 35px rgba(130,145,255,0.4);
+}
+
+.hero-description {
+    max-width: 690px;
+    color: #aab3ca;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    color: #727c98;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    border-radius: 13px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #b6c2ff, #7184ed);
+    color: #0a0d1d;
+    box-shadow: 0 0 30px rgba(113,132,237,0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(113,132,237,0.45);
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255,255,255,0.13);
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+/* ================= MOON ================= */
+
+.moon {
+    position: absolute;
+    right: 3%;
+    top: 100px;
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 25%, #fff, #d9ddf1 35%, #8c94ad 70%, #4d5369);
+    box-shadow:
+        0 0 40px rgba(220,225,255,0.25),
+        0 0 120px rgba(119,137,255,0.18);
+    opacity: 0.9;
+}
+
+.moon::before,
+.moon::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(80,85,105,0.2);
+}
+
+.moon::before {
+    width: 45px;
+    height: 45px;
+    left: 65px;
+    top: 75px;
+    box-shadow:
+        95px 30px 0 12px rgba(80,85,105,0.14),
+        70px 125px 0 7px rgba(80,85,105,0.18),
+        -15px 120px 0 4px rgba(80,85,105,0.15);
+}
+
+.moon::after {
+    width: 25px;
+    height: 25px;
+    right: 65px;
+    top: 180px;
+}
+
+/* ================= CONTENT ================= */
+
+.container {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+}
+
+.toolbar {
+    position: sticky;
+    top: 72px;
+    z-index: 900;
+    padding: 15px 0;
+    background: rgba(5,7,18,0.82);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.toolbar-inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+}
+
+.search {
+    width: 100%;
+    padding: 14px 17px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    outline: none;
+    margin-bottom: 12px;
+}
+
+.search::placeholder {
+    color: #707991;
+}
+
+.search:focus {
+    border-color: rgba(174,189,255,0.5);
+    box-shadow: 0 0 20px rgba(113,132,237,0.1);
+}
+
+.filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter {
+    border: 1px solid rgba(255,255,255,0.09);
+    background: rgba(255,255,255,0.04);
+    color: #9da6bd;
+    border-radius: 10px;
+    padding: 9px 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter:hover,
+.filter.active {
+    background: rgba(139,153,245,0.18);
+    color: white;
+    border-color: rgba(174,189,255,0.35);
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 50px 0;
+}
+
+.stat {
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    background: rgba(14,18,35,0.72);
+}
+
+.stat-number {
+    color: #b5c0ff;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.stat-text {
+    color: #7e879e;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* ================= SECTIONS ================= */
+
+.rules-section {
+    margin: 70px 0;
+    scroll-margin-top: 140px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 10px;
+}
+
+.section-number {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(143,158,255,0.12);
+    color: #b6c2ff;
+    border: 1px solid rgba(143,158,255,0.2);
+    font-weight: 800;
+}
+
+.section-title h2 {
+    font-size: 30px;
+}
+
+.section-description {
+    color: #7e879e;
+    margin-bottom: 25px;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.rule {
+    padding: 21px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(
+        145deg,
+        rgba(20,25,45,0.85),
+        rgba(10,13,27,0.82)
+    );
+    transition: 0.25s;
+}
+
+.rule:hover {
+    transform: translateY(-3px);
+    border-color: rgba(170,185,255,0.25);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+}
+
+.rule.hidden {
+    display: none;
+}
+
+.rule-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.rule-number {
+    color: #b6c2ff;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.rule-text {
+    color: #d5d9e5;
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.penalty {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: rgba(245,100,120,0.1);
+    color: #ff9eaa;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.important {
+    margin-top: 12px;
+    padding: 11px 13px;
+    border-left: 3px solid #aebdff;
+    background: rgba(174,189,255,0.06);
+    color: #aeb8d0;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 0 8px 8px 0;
+}
+
+/* ================= EMPTY ================= */
+
+.empty {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: #79839c;
+}
+
+.empty.show {
+    display: block;
+}
+
+/* ================= BUG REPORT ================= */
+
+.bug-report {
+    width: min(1180px, calc(100% - 32px));
+    margin: 90px auto 0;
+}
+
+.bug-report-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 28px;
+    border-radius: 18px;
+    border: 1px solid rgba(174,189,255,0.16);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(80,94,170,0.14),
+            rgba(255,255,255,0.035)
+        );
+    box-shadow: 0 15px 45px rgba(0,0,0,0.18);
+}
+
+.bug-icon {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    background: rgba(174,189,255,0.1);
+    border: 1px solid rgba(174,189,255,0.18);
+    font-size: 26px;
+}
+
+.bug-report h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.bug-report p {
+    color: #858ea5;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bug-report a {
+    color: #b6c2ff;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.bug-report a:hover {
+    color: white;
+    text-shadow: 0 0 15px rgba(174,189,255,0.5);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: 70px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 45px 0;
+    background: rgba(3,5,12,0.5);
+}
+
+.footer-inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.footer-text {
+    color: #707990;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-links a {
+    padding: 9px 13px;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.05);
+    color: #aeb7cc;
+    font-size: 13px;
+}
+
+.footer-links a:hover {
+    color: white;
+    background: rgba(255,255,255,0.09);
+}
+
+/* ================= TOP BUTTON ================= */
+
+#topButton {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(15,19,37,0.9);
+    color: white;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    font-size: 18px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+
+    .moon {
+        width: 220px;
+        height: 220px;
+        right: -60px;
+        top: 80px;
+        opacity: 0.45;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        top: 65px;
+        padding: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(7,9,20,0.97);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .nav a {
+        padding: 12px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .header {
+        height: 64px;
+    }
+
+    .toolbar {
+        top: 64px;
+    }
+
+    .hero {
+        min-height: 570px;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .moon {
+        width: 170px;
+        height: 170px;
+        top: 55px;
+        right: -70px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        margin: 35px 0;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+    }
+
+    .bug-report-inner {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="#home" class="logo">
+
+            <div class="logo-icon">
+                ☾
+            </div>
+
+            <div>
+                Lunar<span>World</span>
+            </div>
+
+        </a>
+
+        <button class="menu-button" id="menuButton">
+            ☰ Меню
+        </button>
+
+        <nav class="nav" id="nav">
+
+            <a href="#home">
+                Главная
+            </a>
+
+            <a href="#section-1">
+                Основные правила
+            </a>
+
+            <a href="#section-2">
+                Игровые правила
+            </a>
+
+            <a href="#section-3">
+                Аккаунт
+            </a>
+
+            <a href="#section-4">
+                Правила чата
+            </a>
+
+            <a href="#section-5">
+                Проверка ПО
+            </a>
+
+            <a href="#section-6">
+                Донатеры / КП
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+    <div class="moon"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            🌙 Официальный портал сервера
+        </div>
+
+        <h1>
+            <span class="moon-text">LunarWorld</span><br>
+            Правила сервера
+        </h1>
+
+        <p class="hero-description">
+            Правила, наказания и информация для игроков и Команды Проекта
+        </p>
+
+        <p class="hero-subtitle">
+            Соблюдай правила — наслаждайся игрой под светом Луны.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#section-1" class="btn btn-primary">
+                🌙 Перейти к правилам
+            </a>
+
+            <a
+                href="https://vk.com/lunarworl"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-secondary"
+            >
+                💬 Связаться с администрацией
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="toolbar">
+
+    <div class="toolbar-inner">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="Поиск по правилам: читы, бан, администрация..."
+        >
+
+        <div class="filters">
+
+            <button class="filter active" data-filter="all">
+                Все правила
+            </button>
+
+            <button class="filter" data-filter="players">
+                Игроки
+            </button>
+
+            <button class="filter" data-filter="serious">
+                Серьёзные
+            </button>
+
+            <button class="filter" data-filter="account">
+                Аккаунт
+            </button>
+
+            <button class="filter" data-filter="chat">
+                Чат
+            </button>
+
+            <button class="filter" data-filter="check">
+                Проверка ПО
+            </button>
+
+            <button class="filter" data-filter="donators">
+                Донатеры / КП
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-number">
+                6
+            </div>
+
+            <div class="stat-text">
+                Разделов правил
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-number">
+                60+
+            </div>
+
+            <div class="stat-text">
+                Правил сервера
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-number">
+                24/7
+            </div>
+
+            <div class="stat-text">
+                Игровой процесс
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- СЮДА JAVASCRIPT ДОБАВИТ ПРАВИЛА -->
+
+    <div id="rulesContainer"></div>
+
+    <div class="empty" id="empty">
+
+        🌙
+
+        <br><br>
+
+        По вашему запросу ничего не найдено.
+
+    </div>
+
+</div>
+
+</main>
+
+
+<!-- ================= BUG REPORT ================= -->
+
+<section class="bug-report">
+
+    <div class="bug-report-inner">
+
+        <div class="bug-icon">
+            🐞
+        </div>
+
+        <div>
+
+            <h3>
+                Нашли баг?
+            </h3>
+
+            <p>
+                Пишите нам:
+
+                <a
+                    href="https://vk.com/lunarworl"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    vk.com/lunarworl
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+
+            <div class="footer-title">
+                ☾ LunarWorld
+            </div>
+
+            <div class="footer-text">
+                Официальные правила Minecraft-сервера.<br>
+                Играйте честно и уважайте других игроков.
+            </div>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#home">
+                Главная
+            </a>
+
+            <a
+                href="https://vk.com/lunarworl"
+                target="_blank"
+                rel="noopener"
+            >
+                VK
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= TOP BUTTON ================= -->
+
+<button id="topButton">
+    ↑
+</button>
+
+
+<script>
+
+/* =========================================================
+   ПРАВИЛА
+   ========================================================= */
+
+var sections = [
+
+    {
+        id: "section-1",
+        number: "01",
+        category: "players",
+        title: "Основные правила",
+        description: "Общие правила, которые должен соблюдать каждый игрок.",
+        rules: [
+
+            {
+                number: "1.1",
+                text: "Незнание правил не освобождает вас от ответственности."
+            },
+
+            {
+                number: "1.2",
+                text: "Начав играть на наших серверах, Вы автоматически подтверждаете своё согласие с данным сводом правил."
+            },
+
+            {
+                number: "1.3",
+                text: "Высшая Администрация вправе наказать игрока по причине, не указанной в настоящих правилах."
+            },
+
+            {
+                number: "1.4",
+                text: "Деньги потраченные на платные услуги, не возвращаются."
+            },
+
+            {
+                number: "1.5",
+                text: "Администрация не несет ответственности за потерю игровых ценностей в следствии нарушения работоспособности сервера или его плагинов."
+            },
+
+            {
+                number: "1.6",
+                text: "Игроки обязаны соблюдать все правила."
+            },
+
+            {
+                number: "1.7",
+                text: "Администрация имеет право корректировать данный свод правил без уведомления игрока."
+            }
+
+        ]
+    },
+
+
+    {
+        id: "section-2",
+        number: "02",
+        category: "serious",
+        title: "Игровые правила",
+        description: "Основные запреты и нарушения во время игры.",
+        rules: [
+
+            {
+                number: "2.1",
+                text: "Запрещён обман администрации.",
+                penalty: "Бан навсегда."
+            },
+
+            {
+                number: "2.2",
+                text: "Использование/хранение читов и других модификаций клиента, дающих преимущество игроку среди других игроков.",
+                penalty: "Бан 14 дней."
+            },
+
+            {
+                number: "2.2.1",
+                text: "Если игрок который на проверке читов признаётся в использовании/хранении читов, срок наказания уменьшается.",
+                penalty: "Бан 10 дней."
+            },
+
+            {
+                number: "2.2.2",
+                text: "Если у игрока более 4х аккаунтов забаненых за читы, он получает бан по IP.",
+                penalty: "Бан по IP 7 дней."
+            },
+
+            {
+                number: "2.2.3",
+                text: "Запрещён тим с читером.",
+                penalty: "Бан 3 дня."
+            },
+
+            {
+                number: "2.2.4",
+                text: "Запрещено использовать моды как: Neat — который видит игроков под эффектом невидимости; ChestStealer; AutoMyst; Freecam; InventoryTotem; X-Ray; Baritone / Fabaritone; AutoSell — любой; AutoBuy — любой; DiamondGen и его аналоги; Inventory Move и его аналоги; Auto Leave.",
+                penalty: "Бан 7 дней."
+            },
+
+            {
+                number: "2.3.1",
+                text: "Использование багов, сокрытие багов и багоюзеров от администрации.",
+                penalty: "Бан 3 дня.",
+                important: "За каждый баг продемонстрированный администрации, вы получите хороший бонус."
+            },
+
+            {
+                number: "2.3.2",
+                text: "Использование дюпов, сокрытие дюпов и дюперов от администрации.",
+                penalty: "Бан 3 дня, снятие доната.",
+                important: "За каждый дюп продемонстрированный администрации, вы получите огромный бонус."
+            },
+
+            {
+                number: "2.4",
+                text: "Запрещено продавать/покупать у игроков игровые ценности за реальную валюту.",
+                penalty: "Seller: Бан 30 дней (Возможно ЧСП), изъятие всех игровых ценностей. Buyer: Бан 30 дней, изъятие купленных ценностей."
+            },
+
+            {
+                number: "2.5",
+                text: "Запрещено как-либо помогать, укрывать нарушителя или способствовать в его неправомерных действиях.",
+                penalty: "Бан 1 день."
+            },
+
+            {
+                number: "2.6",
+                text: "Запрещено вызывание неполадок в работе сервера или попытки обрушить сервер путем специально вызванных лагов или подобного.",
+                penalty: "Бан навсегда, снятие доната."
+            },
+
+            {
+                number: "2.7",
+                text: "Запрещено выдавать себя за Администрацию.",
+                penalty: "Бан 2 дня."
+            },
+
+            {
+                number: "2.8",
+                text: "Запрещено играть/взаимодействовать и помогать на режиме с игроками в количестве больше, чем разрешено на режиме.",
+                penalty: "Бан 3 дня."
+            },
+
+            {
+                number: "2.9",
+                text: "Запрещено строительство нацистских символик, лавакастов.",
+                penalty: "Бан 1 день."
+            },
+
+            {
+                number: "2.10",
+                text: "Ваше название клана не должно содержать: прямого оскорбления кого-либо, чего-либо; схожесть с названием других проектов/чит клиентов.",
+                penalty: "Бан 3 дня, также нарушитель обязан переименовать клан."
+            },
+
+            {
+                number: "2.11",
+                text: "Запрещено переименовывать любые предметы через наковальню или /name для пиара чего-либо.",
+                penalty: "Бан 14 дней, снятие прав переименовывать предметы навсегда. Наказание вправе выдавать только высшая администрация."
+            }
+
+        ]
+    },
+
+
+    {
+        id: "section-3",
+        number: "03",
+        category: "account",
+        title: "Аккаунт",
+        description: "Правила использования и защиты игрового аккаунта.",
+        rules: [
+
+            {
+                number: "3.1",
+                text: "Ваш игровой никнейм не должен содержать прямого оскорбления кого-либо, чего-либо; схожесть с названием других проектов/чит клиентов/ют, тт которые снимают читы; цифры с нижним подчеркиванием, пример: 123_123_123.",
+                penalty: "Бан навсегда, в случае донатера перенос доната."
+            },
+
+            {
+                number: "3.2",
+                text: "Запрещается предоставлять свой аккаунт другим людям.",
+                penalty: "Бан навсегда."
+            },
+
+            {
+                number: "3.3",
+                text: "Запрещена продажа/передача аккаунтов, продажа привилегий.",
+                penalty: "Бан навсегда, снятие доната."
+            },
+
+            {
+                number: "3.4",
+                text: "Попытка взлома аккаунта или взлом.",
+                penalty: "Бан навсегда по IP, ЧС проекта, снятие всех донатов."
+            },
+
+            {
+                number: "3.5",
+                text: "Донат невозможно перенести на другой аккаунт, исключение правило 3.1."
+            },
+
+            {
+                number: "3.6",
+                text: "Ответственность несет владелец аккаунта, независимо от того, кто совершал действия под данным аккаунтом."
+            }
+
+        ]
+    },
+
+
+    {
+        id: "section-4",
+        number: "04",
+        category: "chat",
+        title: "Правила чата",
+        description: "Правила общения в игровом и голосовом чате.",
+        rules: [
+
+            {
+                number: "4.1",
+                text: "Запрещен Капс/Спам/Флуд в любом из чатов.",
+                penalty: "Мут 15 минут."
+            },
+
+            {
+                number: "4.2",
+                text: "Запрещены унижения, оскорбления, угрозы в сторону игроков.",
+                penalty: "Мут 30 минут."
+            },
+
+            {
+                number: "4.3.1",
+                text: "Запрещена реклама соц. сетей (дискорд серверов/телеграм каналов/вк групп/ютуб каналов и тд).",
+                penalty: "Мут по IP 1 день."
+            },
+
+            {
+                number: "4.3.2",
+                text: "Запрещено распространение вредоносных ссылок.",
+                penalty: "Мут по IP 7 дней."
+            },
+
+            {
+                number: "4.3.3",
+                text: "Запрещено рекламировать сервера Minecraft.",
+                penalty: "Мут по IP 14 дней."
+            },
+
+            {
+                number: "4.4",
+                text: "Запрещено оскорбление проекта.",
+                penalty: "Мут по IP 14 дней."
+            },
+
+            {
+                number: "4.5",
+                text: "Запрещено оскорбление администрации (от зам.куратора до администратора).",
+                penalty: "Мут 5 часов."
+            },
+
+            {
+                number: "4.6",
+                text: "Запрещено оскорбление Команды Проекта (от стажёров до гл.модераторов).",
+                penalty: "Мут 3 часа."
+            },
+
+            {
+                number: "4.7",
+                text: "Чатами для рекламы/покупки/продажи разрешено пользоваться только в их тематичных целях.",
+                penalty: "Мут 30 минут."
+            },
+
+            {
+                number: "4.8",
+                text: "Запрещено оскорблять, упоминать членов семьи, другого игрока.",
+                penalty: "Мут 1 час."
+            },
+
+            {
+                number: "4.9",
+                text: "Запрещается розжиг межнациональной розни, подстрекательство на конфликт этой темы, расизм.",
+                penalty: "Мут 30 минут."
+            },
+
+            {
+                number: "4.10",
+                text: "Игрокам запрещено вызывать других игроков на проверку читов.",
+                penalty: "Мут 2 часа."
+            },
+
+            {
+                number: "4.11",
+                text: "Запрещено упоминание других проектов.",
+                penalty: "Мут 3 часа."
+            },
+
+            {
+                number: "4.12",
+                text: "Запрещено упоминать читы в контексте игры с ними, по типу «нур**ан бустит», «я с нур**аном», «у меня нур****ан» и так далее.",
+                penalty: "Мут по IP 2 дня."
+            },
+
+            {
+                number: "4.13",
+                text: "Запрещена любого рода провокация на нарушение правил.",
+                penalty: "Мут 1 час."
+            },
+
+            {
+                number: "4.14",
+                text: "Запрещено как-либо обходить блокировку чата.",
+                penalty: "Бан 1 день."
+            },
+
+            {
+                number: "4.15",
+                text: "Самопризнание в нарушении правил проекта является поводом для бана."
+            },
+
+            {
+                number: "4.16",
+                text: "Запрещена пропаганда игры с читами, попытки продать читы, дать читы, и так далее.",
+                penalty: "Мут по IP 14 дней."
+            },
+
+            {
+                number: "4.17",
+                text: "Все правила чата так же относятся к войс-чату. Soundpad и прочие штуки разрешены, главное — не нарушать правила чата. В случае нарушений будут выдаваться наказания, которые теперь действуют на все чаты."
+            }
+
+        ]
+    },
+
+
+    {
+        id: "section-5",
+        number: "05",
+        category: "check",
+        title: "Правила проверки ПО",
+        description: "Правила прохождения официальной проверки на запрещённое программное обеспечение.",
+        rules: [
+
+            {
+                number: "5.1",
+                text: "Вы обязаны выполнять требования Проверяющего.",
+                important: "Вы должны понимать, что проверка проводится исключительно в целях поиска читов, запрещённых модификаций, программ и другого запрещённого ПО. Если Проверяющий просит Вас выполнить нелогичные для проверки действия, например: включить веб-камеру, «покукарекать», дать ему ресурсы — отключайтесь от проверки и срочно сообщите об этом Администрации."
+            },
+
+            {
+                number: "5.2",
+                text: "Все проверки проводят только проверенные люди из КП, любая проверка на которую вас вызвали является официальной, вы обязаны её пройти."
+            },
+
+            {
+                number: "5.3",
+                text: "Каждый проверяющий вправе вызвать на проверку кого угодно и когда угодно, ему для этого не нужна причина, пруф и так далее, причина проверки всегда одна — «подозрение в использовании стороннего ПО»."
+            },
+
+            {
+                number: "5.4",
+                text: "Следите за чатом во время проверки, если Вы не увидели/проигнорировали сообщение от Проверяющего, он вправе забанить вас за игнорирование требований во время официальной проверки, это не будет расцениваться поводом для разблокировки аккаунта."
+            },
+
+            {
+                number: "5.5",
+                text: "В случае если у Вас возникли непредвиденные обстоятельства, необходимо обязательно сообщить об этом Проверяющему."
+            },
+
+            {
+                number: "5.6",
+                text: "Запрещается препятствовать проведению проверки: долго открывать папки, задавать неуместные вопросы, оскорблять/унижать Проверяющего, игнорировать его требования и так далее."
+            },
+
+            {
+                number: "5.7",
+                text: "Во время проверки запрещается удалять какие-либо файлы с Вашего ПК, в том числе очищать корзину."
+            },
+
+            {
+                number: "5.8",
+                text: "Во время проверки запрещается выходить из Minecraft. Также не забывайте: «крашнул майн», «был в афк» — не расцениваются как повод для разблокировки аккаунта."
+            },
+
+            {
+                number: "5.9",
+                text: "Все проверки проводятся только через AnyDesk, в связи с блокировкой Discord в России, мы следим за ситуацией и вернём проверки через Discord если посчитаем это нужным, но в данный момент — только AnyDesk."
+            }
+
+        ]
+    },
+
+
+    {
+        id: "section-6",
+        number: "06",
+        category: "donators",
+        title: "Правила для донатеров / КП",
+        description: "Правила для Команды Проекта и игроков с правами.",
+        rules: [
+
+            {
+                number: "6.1",
+                text: "Запрещено размучивать самого себя, если мут был выдан корректно.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.2",
+                text: "Запрещено банить и мутить игроков с некор. причиной. Причина «тест» так же считается некор. причиной, при этом себя с причиной «тест» банить и мутить можно.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.3",
+                text: "Запрещено банить и мутить игроков с некорректными доказательствами.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.4",
+                text: "Запрещено банить и мутить игроков с некор. временем. К примеру за флуд мут выдаётся на 15 минут, а вы замутите на 1 час.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.5",
+                text: "Запрещено разбанивать и размучивать без доказательств.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.6",
+                text: "После покупки разбана нет никакого иммунитета, проверяющий вправе вызвать вас на проверку сразу же после покупки разбана, если вы были забанены за читы. Но забанить вас повторно по доказательству вашего предыдущего бана никто не имеет права.",
+                penalty: "Бан 3 дня + снятие прав."
+            },
+
+            {
+                number: "6.7",
+                text: "Команда Проекта (от стажёра до владельца) обязательно должна проводить обмены честно, обманывать игроков запрещено. К примеру человек из Команды Проекта может быть вашим гарантом, когда вы хотите купить донат за игровую валюту.",
+                penalty: "Снятие с должности."
+            },
+
+            {
+                number: "6.8",
+                text: "Команда Проекта не может использовать команды модерации для личной выгоды, для своих целей и так далее.",
+                penalty: "По решению администрации, снятие с должности, в некоторых случаях ЧС проекта."
+            }
+
+        ]
+    }
+
+];
+
+
+/* =========================================================
+   ОТРИСОВКА ПРАВИЛ
+   ========================================================= */
+
+var rulesContainer = document.getElementById("rulesContainer");
+
+function renderRules() {
+
+    rulesContainer.innerHTML = "";
+
+    for (var i = 0; i < sections.length; i++) {
+
+        var section = sections[i];
+
+        var sectionElement = document.createElement("section");
+
+        sectionElement.className = "rules-section";
+        sectionElement.id = section.id;
+        sectionElement.setAttribute(
+            "data-category",
+            section.category
+        );
+
+        var title = document.createElement("div");
+
+        title.className = "section-title";
+
+        title.innerHTML =
+            '<div class="section-number">' +
+            section.number +
+            '</div>' +
+            '<h2>' +
+            section.title +
+            '</h2>';
+
+        sectionElement.appendChild(title);
+
+
+        var description = document.createElement("p");
+
+        description.className = "section-description";
+        description.textContent = section.description;
+
+        sectionElement.appendChild(description);
+
+
+        var grid = document.createElement("div");
+
+        grid.className = "rules-grid";
+
+
+        for (var j = 0; j < section.rules.length; j++) {
+
+            var rule = section.rules[j];
+
+            var card = document.createElement("article");
+
+            card.className = "rule";
+
+            card.setAttribute(
+                "data-category",
+                section.category
+            );
+
+
+            var searchableText =
+                rule.number +
+                " " +
+                rule.text +
+                " " +
+                (rule.penalty || "") +
+                " " +
+                (rule.important || "");
+
+
+            card.setAttribute(
+                "data-search",
+                searchableText.toLowerCase()
+            );
+
+
+            var top = document.createElement("div");
+
+            top.className = "rule-top";
+
+
+            var number = document.createElement("div");
+
+            number.className = "rule-number";
+
+            number.textContent =
+                "§ " + rule.number;
+
+
+            top.appendChild(number);
+
+            card.appendChild(top);
+
+
+            var text = document.createElement("div");
+
+            text.className = "rule-text";
+
+            text.textContent = rule.text;
+
+            card.appendChild(text);
+
+
+            if (rule.penalty) {
+
+                var penalty = document.createElement("div");
+
+                penalty.className = "penalty";
+
+                penalty.textContent =
+                    "⚠ " + rule.penalty;
+
+                card.appendChild(penalty);
+            }
+
+
+            if (rule.important) {
+
+                var important = document.createElement("div");
+
+                important.className = "important";
+
+                important.textContent =
+                    "💡 " + rule.important;
+
+                card.appendChild(important);
+            }
+
+
+            grid.appendChild(card);
+
+        }
+
+
+        sectionElement.appendChild(grid);
+
+        rulesContainer.appendChild(sectionElement);
+    }
+
+}
+
+
+/* =========================================================
+   ФИЛЬТРЫ
+   ========================================================= */
+
+var currentFilter = "all";
+
+function filterRules() {
+
+    var searchInput =
+        document.getElementById("search");
+
+    var query =
+        searchInput.value.toLowerCase().trim();
+
+
+    var cards =
+        document.querySelectorAll(".rule");
+
+    var sectionsElements =
+        document.querySelectorAll(".rules-section");
+
+
+    var visibleCount = 0;
+
+
+    for (var i = 0; i < cards.length; i++) {
+
+        var card = cards[i];
+
+        var category =
+            card.getAttribute("data-category");
+
+        var searchText =
+            card.getAttribute("data-search");
+
+
+        var categoryMatch =
+            currentFilter === "all" ||
+            category === currentFilter;
+
+
+        var searchMatch =
+            query === "" ||
+            searchText.indexOf(query) !== -1;
+
+
+        if (categoryMatch && searchMatch) {
+
+            card.classList.remove("hidden");
+
+            visibleCount++;
+
+        } else {
+
+            card.classList.add("hidden");
+
+        }
+
+    }
+
+
+    for (var j = 0; j < sectionsElements.length; j++) {
+
+        var section =
+            sectionsElements[j];
+
+        var sectionCards =
+            section.querySelectorAll(".rule");
+
+
+        var visibleInSection = 0;
+
+
+        for (var k = 0; k < sectionCards.length; k++) {
+
+            if (
+                !sectionCards[k]
+                    .classList
+                    .contains("hidden")
+            ) {
+
+                visibleInSection++;
+
+            }
+
+        }
+
+
+        if (visibleInSection === 0) {
+
+            section.style.display = "none";
+
+        } else {
+
+            section.style.display = "";
+
+        }
+
+    }
+
+
+    var empty =
+        document.getElementById("empty");
+
+
+    if (visibleCount === 0) {
+
+        empty.classList.add("show");
+
+    } else {
+
+        empty.classList.remove("show");
+
+    }
+
+}
+
+
+/* =========================================================
+   КНОПКИ ФИЛЬТРОВ
+   ========================================================= */
+
+var filterButtons =
+    document.querySelectorAll(".filter");
+
+
+for (var i = 0; i < filterButtons.length; i++) {
+
+    filterButtons[i].addEventListener(
+        "click",
+        function() {
+
+            for (
+                var j = 0;
+                j < filterButtons.length;
+                j++
+            ) {
+
+                filterButtons[j]
+                    .classList
+                    .remove("active");
+
+            }
+
+
+            this.classList.add("active");
+
+
+            currentFilter =
+                this.getAttribute("data-filter");
+
+
+            filterRules();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ПОИСК
+   ========================================================= */
+
+document
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        filterRules
+    );
+
+
+/* =========================================================
+   МОБИЛЬНОЕ МЕНЮ
+   ========================================================= */
+
+var menuButton =
+    document.getElementById("menuButton");
+
+var nav =
+    document.getElementById("nav");
+
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        nav.classList.toggle("open");
+
+    }
+);
+
+
+var navLinks =
+    nav.querySelectorAll("a");
+
+
+for (var i = 0; i < navLinks.length; i++) {
+
+    navLinks[i].addEventListener(
+        "click",
+        function() {
+
+            nav.classList.remove("open");
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   КНОПКА НАВЕРХ
+   ========================================================= */
+
+var topButton =
+    document.getElementById("topButton");
+
+
+window.addEventListener(
+    "scroll",
+    function() {
+
+        if (window.scrollY > 500) {
+
+            topButton.style.display =
+                "block";
+
+        } else {
+
+            topButton.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+topButton.addEventListener(
+    "click",
+    function() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   ЗАПУСК
+   ========================================================= */
+
+renderRules();
+filterRules();
+
+</script>
+
+</body>
+</html>
